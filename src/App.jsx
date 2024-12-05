@@ -29,7 +29,7 @@ const App = () => {
     if (data.NatureofCash === 'Cashin' && data.CashinValue) {
       delete copyOfData.CashOutValue;
       console.log (copyOfData)
-      expenseArray.push(copyOfData); 
+      expenseArray.push({...copyOfData , addDate: getDate()}); 
       setExpenseArray([...expenseArray]);
       
       const CITotal = expenseArray.filter(item => item.NatureofCash === 'Cashin');
@@ -38,8 +38,9 @@ const App = () => {
   
     if (data.NatureofCash === 'Cashout' && data.CashOutValue) {
       delete copyOfData.CashinValue;
+      delete copyOfData.Sourceoffunds;
       console.log (copyOfData)
-      expenseArray.push(copyOfData);  
+      expenseArray.push({...copyOfData , addDate: getDate()});  
       setExpenseArray([...expenseArray]);
       
       const COTotal = expenseArray.filter(item => item.NatureofCash === 'Cashout');
@@ -75,6 +76,29 @@ const App = () => {
   const handleSourceOfFunds = (category) => {
     setValue ('Sourceoffunds' , category)
     trigger('Sourceoffunds')
+  }
+
+
+  const deleteItem = (index) => {
+    
+    expenseArray.splice (index , 1)
+    setExpenseArray([...expenseArray])
+    
+    const CITotal = expenseArray.filter(item => item.NatureofCash === 'Cashin');
+      setCashInTotalArray([...CITotal]);
+
+    const COTotal = expenseArray.filter(item => item.NatureofCash === 'Cashout');
+    setCashOutTotalArray([...COTotal]);
+  }
+  
+  function getDate() {
+    const date = new Date();
+    const day = new Intl.DateTimeFormat('en-GB', { day: 'numeric' }).format(date);
+    const month = new Intl.DateTimeFormat('en-GB', { month: 'long' }).format(date);
+    const year = new Intl.DateTimeFormat('en-GB', { year: 'numeric' }).format(date);
+  
+    const formattedDate = `${month} ${day}, ${year}`;
+    return formattedDate;
   }
 
 
@@ -129,13 +153,8 @@ const App = () => {
           </div>
 
           
-          
-          
-          
-          
-          
-          
-          
+              
+
           
             {cashNature === 'Cashin'? <div>
               <select {...register('CashinValue' , {required: 'Cashin category is required'})} onChange={(e)=> handleCashinCategory(e.target.value)}>
@@ -156,18 +175,6 @@ const App = () => {
             </div>
               :  null}
           
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -195,12 +202,40 @@ const App = () => {
           </select> : null}
           {errors.Sourceoffunds && <span>{errors.Sourceoffunds.message}</span>}
 
-
-
         
           <button type='submit' className="btn btn-active btn-primary">Done</button>
         
       </form>
+    </div>
+
+
+
+
+
+
+    <div className='flex flex-col justify-center items-center gap-2'>
+      
+      <div className='flex justify-center gap-5'>
+        <button className="btn btn-active btn-primary w-[75px]">S.No</button>
+        <button className="btn btn-active btn-primary w-[175px]">Nature</button>
+        <button className="btn btn-active btn-primary w-[175px]">Category</button>
+        <button className="btn btn-active btn-primary w-[175px]">Source</button>
+        <button className="btn btn-active btn-primary w-[175px]">Amount {'Rs.'}</button>
+        <button className="btn w-[100px]">Action</button>
+      </div>
+
+      {expenseArray.map ((item , index)=> {
+        return <div className='flex justify-center items-center gap-5 border-b border-b-2 py-3'>
+        <p className='w-[75px] text-center'>{index+1}</p>
+        <p className='w-[175px] text-center'>{item.NatureofCash}</p>
+        <p className='w-[175px] text-center'>{item.CashinValue}{item.CashOutValue}</p>
+        <p className='w-[175px] text-center'>{item.Sourceoffunds || 'Nil'}</p>
+        <p className='w-[175px] text-center'>{item.inputValue}</p>
+        <button className="bg-error rounded text-white py-1 w-[100px]" onClick={()=> deleteItem (index)}>Delete</button>
+      </div>
+      })}
+      
+      
 
     </div>
     
