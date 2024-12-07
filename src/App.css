@@ -1,0 +1,14 @@
+.scrollbar-custom {
+    scrollbar-width: thin; 
+    scrollbar-color: #6a11cb #f8fafc; 
+    padding-right: 5px;
+  }
+  
+.scrollbar-custom:hover {
+    scrollbar-color: #ff512f #f8fafc; 
+  }
+
+.scrollbar-custom {
+    overflow: auto; 
+  }
+    
