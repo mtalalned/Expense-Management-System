@@ -1,14 +1,20 @@
-.scrollbar-custom {
-    scrollbar-width: thin; 
-    scrollbar-color: #6a11cb #f8fafc; 
-    padding-right: 5px;
-  }
-  
-.scrollbar-custom:hover {
-    scrollbar-color: #ff512f #f8fafc; 
-  }
+::-webkit-scrollbar {
+  width: 7px;
+}
 
-.scrollbar-custom {
-    overflow: auto; 
-  }
-    
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 40px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+.overflowstyling {
+  overflow-y: scroll;
+}

@@ -224,7 +224,7 @@ const App = () => {
         <button className="bg-green-400 py-2 hover:bg-green-500 rounded-md text-white w-[100px] font-semibold">Action</button>
       </div>
 
-      <div className='absolute top-[70px] h-[275px] scrollbar-custom'>
+      <div className='absolute top-[70px] h-[275px] overflowstyling'>
       {expenseArray.map ((item , index)=> {
         return <div className='flex justify-center items-center gap-5 border-b border-b-2 py-3 w-full'>
         <p className='w-[75px] text-center'>{index+1}</p>
