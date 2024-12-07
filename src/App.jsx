@@ -110,7 +110,7 @@ const App = () => {
   return (
     <div className='flex flex-col justify-center items-center py-7 gap-4'>
     
-      <div className='flex justify-center gap-[100px] border border-black py-2 w-[80%] bg-slate-50 rounded-md'>
+      <div className='flex justify-center gap-[100px] py-2 w-[80%] bg-slate-50 rounded-md shadow-[2px_2px_10px_0.5px_#ffffff]'>
         <div className='flex flex-col justify-center'>
           <h1 className='text-2xl font-bold text-center'>Cash in</h1>
           <p className='font-bold text-2xl text-center text-green-500'>Rs. {cashInTotalArray.reduce((acc , CVal) => {
@@ -138,10 +138,10 @@ const App = () => {
 
 
 
-        <form onSubmit={handleSubmit(onSubmit)} className='relative py-1 flex justify-start items-start gap-5 border border-black w-[80%]'>
+      <form onSubmit={handleSubmit(onSubmit)} className='relative py-1 flex justify-start items-start gap-5 w-[80%]'>
         
           <div className='flex flex-col justify-center items-start'>
-            <input type="number" placeholder="Enter amount here" className="p-2 border rounded-md bg-slate-50 text-gray-700 focus:ring-2 focus:ring-slate-400 transition duration-300 ease-in-out" {...register('inputValue' , {required: true})}/>
+            <input type="number" placeholder="Enter amount here" style={{backgroundColor: '#f8fafc'}} className="p-2 border rounded-md bg-slate-500 text-gray-700 focus:ring-2 focus:ring-slate-400 transition duration-300 ease-in-out" {...register('inputValue' , {required: true})}/>
             {errors.inputValue && <span className='text-red-500 text-sm text-start'>This field is required</span>}      
           </div>
         
@@ -219,7 +219,7 @@ const App = () => {
 
 
 
-    <div className='flex flex-col justify-start items-center gap-2 w-[80%] h-[390px] border border-black py-5 bg-slate-50 rounded-md relative'>
+    <div className='flex flex-col justify-start items-center gap-2 w-[80%] h-[390px] py-5 bg-slate-50 rounded-md relative shadow-[2px_2px_10px_0.5px_#ffffff]'>
       
       <div className='flex justify-center gap-5 w-full fixed'>
         <button className="w-[75px] py-2 rounded-md bg-amber-400 font-semibold text-white hover:bg-amber-500 transition duration-300 ease-in-out">S.No</button>
@@ -231,8 +231,8 @@ const App = () => {
         <button className="bg-green-400 py-2 hover:bg-green-500 rounded-md text-white w-[100px] font-semibold">Action</button>
       </div>
 
-      <div className='absolute top-[70px] h-[300px] overflow-y-scroll'>
-      {expenseArray.map ((item , index)=> {
+      <div className='absolute top-[70px] h-[300px] overflow-y-auto w-full pe-5 ps-10 me-5'>
+      {expenseArray.length > 0 ? expenseArray.map ((item , index)=> {
         return <div className='flex justify-center items-center gap-5 border-b border-b-2 py-3 w-full'>
         <p className='w-[75px] text-center'>{index+1}</p>
         <p className='w-[175px] text-center'>{item.addDate}</p>
@@ -242,8 +242,10 @@ const App = () => {
         <p className='w-[135px] text-center'>{item.inputValue}</p>
         <button className="bg-error rounded-md text-white py-1 w-[100px] hover:bg-red-500 transition duration-300 ease-in-out font-semibold" onClick={()=> deleteItem (index)}>Delete</button>
       </div>
-      })}
-      </div>
+      }) : <div className='flex justify-center items-center gap-5 font-bold py-3 w-full min-h-[275px] text-4xl'>
+        Add Data in the List
+      </div>}
+    </div>
       
     </div>
     
