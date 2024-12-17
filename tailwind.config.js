@@ -1,4 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+import daisyui from 'daisyui';
+import scrollbar from 'tailwind-scrollbar';
+
 export default {
   content: [
     "./index.html",
@@ -8,9 +11,9 @@ export default {
     extend: {},
   },
   plugins: [
-    require('daisyui'),
-    require('tailwind-scrollbar'),
-    require('tailwind-scrollbar')({ nocompatible: true }),
-    require('tailwind-scrollbar')({ preferredStrategy: 'pseudoelements' }),
+    daisyui,
+    scrollbar,
+    scrollbar({ nocompatible: true }),
+    scrollbar({ preferredStrategy: 'pseudoelements' }),
   ],
 }
